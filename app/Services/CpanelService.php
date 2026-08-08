@@ -1,0 +1,5 @@
+<?php
+declare(strict_types=1);
+namespace TempMail\Services;
+use GuzzleHttp\Client;
+final class CpanelService { private Client $http; public function __construct(){ $host=rtrim(getenv('CPANEL_HOST')?:'','/'); $user=getenv('CPANEL_USER')?:'';$token=getenv('CPANEL_TOKEN')?:''; if(!$host||!$user||!$token)throw new \RuntimeException('cPanel credentials are not configured.'); $this->http=new Client(['base_uri'=>$host.'/execute/','headers'=>['Authorization'=>'cpanel '.$user.':'.$token],'timeout'=>20]); } public function execute(string $module,string $function,array $params=[]):array{$r=$this->http->get($module.'/'.$function,['query'=>$params]);return json_decode((string)$r->getBody(),true)?:[];} public function createMailbox(string $email,string $password,int $quota=1024):array{[$local,$domain]=array_pad(explode('@',$email,2),2,'');return $this->execute('Email','add_pop',['email'=>$local,'domain'=>$domain,'password'=>$password,'quota'=>$quota]);} public function deleteMailbox(string $email):array{[$local,$domain]=array_pad(explode('@',$email,2),2,'');return $this->execute('Email','delete_pop',['email'=>$local,'domain'=>$domain]);}}
