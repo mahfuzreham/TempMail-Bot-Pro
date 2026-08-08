@@ -1,0 +1,7 @@
+<?php
+declare(strict_types=1);
+require dirname(__DIR__).'/vendor/autoload.php';
+use TempMail\Core\Env; use TempMail\Core\Database;
+Env::load(dirname(__DIR__)); if(session_status()!==PHP_SESSION_ACTIVE)session_start(); if(empty($_SESSION['admin_id'])){header('Location: login.php');exit;}
+$db=Database::connect(); $stats=[]; foreach(['telegram_users','domains','mailboxes','emails'] as $t){$stats[$t]=(int)$db->query("SELECT COUNT(*) FROM `$t`")->fetchColumn();}
+?><!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"></head><body><nav class="navbar navbar-dark bg-dark"><div class="container"><span class="navbar-brand">TempMail Bot Pro</span><a class="btn btn-outline-light btn-sm" href="logout.php">Logout</a></div></nav><main class="container py-4"><h2 class="mb-4">Dashboard</h2><div class="row g-3"><?php foreach($stats as $name=>$value): ?><div class="col-sm-6 col-lg-3"><div class="card shadow-sm"><div class="card-body"><div class="text-secondary text-capitalize"><?=htmlspecialchars(str_replace('_',' ',$name))?></div><div class="display-6"><?=$value?></div></div></div></div><?php endforeach; ?></div></main></body></html>
