@@ -1,0 +1,4 @@
+<?php
+declare(strict_types=1);
+require dirname(__DIR__).'/vendor/autoload.php';
+?><!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TempMail Admin</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"></head><body><nav class="navbar navbar-dark bg-dark"><div class="container"><span class="navbar-brand">TempMail Bot Pro Admin</span></div></nav><main class="container py-4"><div class="row g-3"><div class="col-md-3"><div class="card"><div class="card-body"><h6>Users</h6><strong>0</strong></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h6>Mailboxes</h6><strong>0</strong></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h6>Domains</h6><strong>0</strong></div></div></div></div></main></body></html>
