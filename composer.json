@@ -1,0 +1,8 @@
+{
+  "name": "mahfuzreham/tempmail-bot-pro",
+  "description": "Production-ready Telegram temporary mail platform with cPanel and IMAP support",
+  "type": "project",
+  "require": {"php": ">=8.2", "ext-pdo": "*", "ext-json": "*", "ext-imap": "*", "vlucas/phpdotenv": "^5.6", "guzzlehttp/guzzle": "^7.9", "monolog/monolog": "^3.8"},
+  "autoload": {"psr-4": {"TempMail\\": "app/"}},
+  "scripts": {"check": "php -l public/index.php && php -l bot/webhook.php"}
+}
